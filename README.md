@@ -64,8 +64,8 @@ I want the vending machine to keep track of the change it contains,
 so that i can tally up my accounts at the end of the month.
 
 '''
-Given.. I my vending machine contains an number of coins,
-When.. I use the print cash method (or similar),
+Given.. my vending machine contains an number of coins,
+When.. I use the print coins method (or similar),
 Then.. I am provided a list of all the coins in the machine at the moment.
 '''
 
@@ -140,6 +140,31 @@ Given.. z (from an earlier AC - i.e. change due to buyer) is due to the buyer,
 When.. the machine decides which coins to return to the buyer in the change,
 Then.. the largest denominations are selected before smaller ones.
 '''
+
+### Objects / attributes / methods
+
+Class: Vending machine
+attributes:
+> coin_hash(hash of two int: coin => number of coins)
+> product_hash(hash of string and intiger: product_name => count)
+> buyer_paid; an intiger that the buyer has added to the machine.
+methods:
+> restock_product(two arguments; product and count)
+> add_product(three arguments; product, count and price)
+> restock_coins(two arguments; coin_value and number)
+> print_stock; return a formatted list of the products and the count of each.
+> print_coins; return a formatted list of the coins and the count of each.
+> buy(one argument that is a string of the product name)
+private methods:
+> reset_buyer_paid; helper type to return buyer paid to zero.
+> calculate_exchange(two arguments; buyer paid attribute and product price attribute); will be returning a request for more money to the user or returning change the the user.
+
+Class: Product
+attributes:
+> name; a simple string for each product object.
+> price; a simple intiger for the value of each.
+methods:
+> none
 
 ### Problem solving - workings
 
