@@ -39,11 +39,13 @@ When.. I add it to the vending machine,
 Then.. It is stored it the stock attribute of the machine.
 '''
 
+COMPLETE:
 As a vending machine owner,
 I want to be able to restock my vending machine with change,
 so that willing buyers are not short/over changed.
 
 '''
+COMPLETE:
 Given.. I have a range of different value coins,
 When.. I add those coins to my machine,
 Then.. those coins are saved in the change variable of the machine.
@@ -64,6 +66,7 @@ I want the vending machine to keep track of the change it contains,
 so that i can tally up my accounts at the end of the month.
 
 '''
+COMPLETE:
 Given.. my vending machine contains an number of coins,
 When.. I use the print coins method (or similar),
 Then.. I am provided a list of all the coins in the machine at the moment.
@@ -119,11 +122,13 @@ When.. i print a list of the products in the machine,
 Then.. i see different items in the return.
 '''
 
+COMPLETE:
 As a vending machine owner,
 I want my machine to hold 1p, 2p, 5p, 10p, 20p, 50p, £1 and £2 coins,
 so that i can provide change to a range of different transactions.
 
 '''
+COMPLETE:
 Given.. i have added a number of different coins to the machine for it to hold,
 When.. i print out a list of the change in the machine
 Then.. i see a list of the various denomination and the number of those coins.
@@ -205,7 +210,8 @@ No API used in this project.
 
 ## Reflection / further development
 
-WHAT FURTHER FEATURES WOULD I ADD IF I HAD MORE TIME?
+- Added ability to hold and restock coins
+- 
 
 ## Credits / team members
 
