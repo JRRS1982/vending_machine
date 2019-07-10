@@ -1,4 +1,5 @@
 require 'vending_machine'
+require 'pry'
 
 describe 'VendingMachine' do
   context '.restock_coins' do
@@ -23,7 +24,15 @@ describe 'VendingMachine' do
     it 'prints out what coins are in the machine' do
       my_vender = VendingMachine.new
       my_vender.restock_coins(coin_name: '£1', coin_count: 5)
-      expect(my_vender.print_coins).to eq("£1 || 5")
+      expect(my_vender.change['£1']).to eq(5)
+    end
+
+    it 'the coin statement has a heading' do
+      expect(STDOUT).to receive(:puts).with("coin's value || count")
+      expect(STDOUT).to receive(:puts).with("£1 || 5\n")
+      my_vender = VendingMachine.new
+      my_vender.restock_coins(coin_name: '£1', coin_count: 5)
+      my_vender.print_coins
     end
   end
 end

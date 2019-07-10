@@ -14,14 +14,18 @@ class VendingMachine
     end
   end
 
-  def print_coins_header
-    "coin's value || count"
-  end
-
   def print_coins
+
+    print_coins_header
     @change.each do |key, value|
       next if value == 0
-      return "#{key} || #{value}"
+      puts "#{key} || #{value}\n"
     end
+  end
+
+  private
+  
+  def print_coins_header
+    puts "coin's value || count"
   end
 end
