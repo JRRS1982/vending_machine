@@ -35,6 +35,7 @@ class VendingMachine
   end
 
   def print_products
+    product_header
     z = unique_products
     z.each do |x|
       number_of_products = product_count(x)

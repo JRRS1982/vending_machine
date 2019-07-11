@@ -147,7 +147,6 @@ As a vending machine owner,
 I want my machine to hold 1p, 2p, 5p, 10p, 20p, 50p, £1 and £2 coins,
 so that i can provide change to a range of different transactions.
 
-COMPLETE:
 > Given.. i have added a number of different coins to the machine for it to hold,
 >
 > When.. i print out a list of the change in the machine
