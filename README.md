@@ -1,11 +1,11 @@
 # Project title
 
 'Vending Machine' is a tech test provided to me by Cleo, as part of their
-interviewing process.
+interview process.
 
 ## Motivation / Approach
 
-This project was started to try at get a job at Cleo, a pretty cool company.
+This project was started to try at get a job at Cleo.
 
 I approached the project with a planning mindset, although I could start coding
 straight away and dynamically build the project as I go (with TDD), I thought
@@ -29,75 +29,93 @@ in an images file of the project at the root level.
 
 ### User Stories / Acceptance Criteria
 
+COMPLETE:
 As a vending machine owner,
 I want to be able to restock my vending machine with goods for sale,
 so that I can sell my stock to willing buyers.
 
-'''
-Given.. I have a product, which has at least a price,
-When.. I add it to the vending machine,
-Then.. It is stored it the stock attribute of the machine.
-'''
+> Given.. I have a product, which has at least a price,
+> 
+> When.. I add it to the vending machine,
+>
+> Then.. It is stored it the stock attribute of the machine.
+
 
 COMPLETE:
 As a vending machine owner,
 I want to be able to restock my vending machine with change,
-so that willing buyers are not short/over changed.
+so that the machine has coins available for distribution to buyer.
 
-'''
+> Given.. I have a range of different value coins,
+>
+> When.. I add those coins to my machine,
+>
+> Then.. those coins are saved in the change variable of the machine.
+
 COMPLETE:
-Given.. I have a range of different value coins,
-When.. I add those coins to my machine,
-Then.. those coins are saved in the change variable of the machine.
-'''
-
 As a vending machine owner,
 I want the vending machine to keep track of the stock it contains,
-so that buyers cant buy items that are not in stock.
+so that I know what I need to restock it with.
 
-'''
-Given.. I my vending machine contains a number of products,
-When.. I use the print products method (or similar),
-Then.. A list of the products that the machine contains is printed.
-'''
+> Given.. I my vending machine contains a number of products,
+>
+> When.. I use the print products method (or similar),
+>
+> Then.. A list of the products that the machine contains is printed.
 
+COMPLETE:
 As a vending machine owner,
 I want the vending machine to keep track of the change it contains,
-so that i can tally up my accounts at the end of the month.
+so that I know what coins I need to restock it with.
 
-'''
-COMPLETE:
-Given.. my vending machine contains an number of coins,
-When.. I use the print coins method (or similar),
-Then.. I am provided a list of all the coins in the machine at the moment.
-'''
+> Given.. my vending machine contains an number of coins,
+>
+> When.. I use the print coins method (or similar),
+>
+> Then.. I am provided a list of all the coins in the machine at the moment.
 
 As a vending machine owner,
-I want the vending machine to ask the buyer for money money if they are short,
+I want the vending machine to allow the user to enter enough change, to buy a product from the machine.
+
+> Given.. the vending machine has a product and the user has entered enough change to the machine
+>
+> When they select buy product (or similar) and select a product that is in stock.
+>
+> Then the selected product is removed from the stock in the machine and the change the machine holds increases by the cost of the product and no more.
+
+As a vending machine owner,
+I want the vending machine to ask the buyer for more money if they are short,
 so that i dont provide goods to the buyer at below my set price.
 
-'''
-Given.. a buyer has entered the selection for a product,
-When.. the current deposit (or similar) attribute of the machine doesnt contain
+> Given.. a buyer has entered the selection for a product,
+>
+> When.. the current deposit (or similar) attribute of the machine doesnt contain
 sufficent value for the item,
-Then.. a message is returned to the buyer to enter the difference between the
+>
+> Then.. a message is returned to the buyer to enter the difference between the
 current deposit value and the cost of the product they have selected.
-'''
+
 As a vending machine owner,
 I want the vending machine to return the correct amount of change to the buyer,
 if they have entered too much cash for the selected item.
-'''
-Given.. a buyer enters x cash,
-When.. a buyer selcts an object which costs y,
-Then.. x - y = z and z is returned to the buyer in the form of coins.
 
-Given.. z (from above) is due to the buyer,
-When.. the coins are not availble either in part or whole,
-Then.. a lower denomination coins is issued to buyer.
+> Given.. a buyer enters x cash,
+> 
+> When.. a buyer selcts an object which costs y,
+> 
+> Then.. x - y = z and z is returned to the buyer in the form of coins.
 
-Given.. z is due to the buyer,
-When.. there is not enough change in the machine (in any combination),
-Then.. what is available is issued and a message is given the the buyer to
+> Given.. z (from above) is due to the buyer,
+>
+> When.. the coins are not availble either in part or whole,
+>
+> Then.. a lower denomination coins is issued to buyer.
+
+> Given.. z (from above) is due to the buyer,
+>
+> When.. there is not enough change in the machine (in any combination),
+>
+> Then.. what is available is issued and a message is given the the buyer to
 contact me for the residual (the machine owner).
 '''
 
@@ -106,70 +124,77 @@ I want the buyer to be given the product after they have entered their selection
 and paid enought for it,
 so that there is valid exchange of goods for a fee.
 
-'''
-Given.. a buyer has entered enough for the product,
-When.. the product is available,
-Then.. return the product to the buyer and remove it from the machines inventory.
-'''
 
+> Given.. a buyer has entered enough for the product,
+>
+> When.. the product is available,
+>
+> Then.. return the product to the buyer and remove it from the machines inventory.
+
+COMPLETE: 
 As a vending machine owner,
 I want my machine to hold a range of different goods,
 so that i can appeal to people of different tastes.
 
-'''
-Given.. i have added a number of different products to the inventory,
-When.. i print a list of the products in the machine,
-Then.. i see different items in the return.
-'''
+> Given.. i have added a number of different products to the inventory,
+>
+> When.. i print a list of the products in the machine,
+> 
+> Then.. i see different items in the return.
 
 COMPLETE:
 As a vending machine owner,
 I want my machine to hold 1p, 2p, 5p, 10p, 20p, 50p, £1 and £2 coins,
 so that i can provide change to a range of different transactions.
 
-'''
 COMPLETE:
-Given.. i have added a number of different coins to the machine for it to hold,
-When.. i print out a list of the change in the machine
-Then.. i see a list of the various denomination and the number of those coins.
+> Given.. i have added a number of different coins to the machine for it to hold,
+>
+> When.. i print out a list of the change in the machine
+>
+> Then.. i see a list of the various denomination and the number of those coins.
 '''
 
-Nice to have:
+Above and beyond - for extension if completed.
 
 As a vending machine owner,
 I want my machine to return larger denomination coins before smaller coins,
 so that i dont run out of small coins quickly.
 
-'''
-Given.. z (from an earlier AC - i.e. change due to buyer) is due to the buyer,
-When.. the machine decides which coins to return to the buyer in the change,
-Then.. the largest denominations are selected before smaller ones.
+> Given.. z (from an earlier AC - i.e. change due to buyer) is due to the buyer,
+>
+>When.. the machine decides which coins to return to the buyer in the change,
+>
+> Then.. the largest denominations are selected before smaller ones.
 '''
 
-### Objects / attributes / methods
+## Objects
 
-Class: Vending machine
-attributes:
-> coin_hash(hash of two int: coin => number of coins)
-> product_hash(hash of string and intiger: product_name => count)
-> buyer_paid; an intiger that the buyer has added to the machine.
-methods:
-> restock_product(two arguments; product and count)
-> add_product(three arguments; product, count and price)
-> restock_coins(two arguments; coin_value and number)
-> print_stock; return a formatted list of the products and the count of each.
-> print_coins; return a formatted list of the coins and the count of each.
-> buy(one argument that is a string of the product name)
+### Class: Vending machine
+Attributes:
+- coin_hash(hash of two int: coin => number of coins)
+- product_hash(hash of string and intiger: product_name => count)
+- buyer_paid; an intiger that the buyer has added to the machine.
+
+Methods:
+- restock_product(two arguments; product and count)
+- add_product(three arguments; product, count and price)
+- restock_coins(two arguments; coin_value and number)
+- print_stock; return a formatted list of the products and the count of each.
+- print_coins; return a formatted list of the coins and the count of each.
+- buy(one argument that is a string of the product name)
 private methods:
-> reset_buyer_paid; helper type to return buyer paid to zero.
-> calculate_exchange(two arguments; buyer paid attribute and product price attribute); will be returning a request for more money to the user or returning change the the user.
+- reset_buyer_paid; helper type to return buyer paid to zero.
+- calculate_exchange(two arguments; buyer paid attribute and product price attribute); will be returning a request for more money to the user or returning change the the user.
 
-Class: Product
-attributes:
-> name; a simple string for each product object.
-> price; a simple intiger for the value of each.
-methods:
-> none
+### Class: Product
+
+Attributes:
+- name; a simple string for each product object.
+- price; a simple intiger for the value of each.
+
+Methods:
+- none
 
 ### Problem solving - workings
 
@@ -202,7 +227,7 @@ attached spec files for details of the testing that was carried out.
 Please find attached a gem file listing those gems for installation, use the
 following to run the file from terminal:
 
-1) ruby vending_machine.rb
+- ruby vending_machine.rb
 
 ## API Use
 
@@ -210,8 +235,8 @@ No API used in this project.
 
 ## Reflection / further development
 
-- Added ability to hold and restock coins
-- 
+At the moment I have products and coins, next steps would be to start 
+
 
 ## Credits / team members
 
