@@ -1,3 +1,4 @@
+# The product represents an item in the vending machine
 class Product
   attr_reader :name, :price
 

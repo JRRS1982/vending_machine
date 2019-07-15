@@ -35,11 +35,10 @@ I want to be able to restock my vending machine with goods for sale,
 so that I can sell my stock to willing buyers.
 
 > Given.. I have a product, which has at least a price,
-> 
+>
 > When.. I add it to the vending machine,
 >
 > Then.. It is stored it the stock attribute of the machine.
-
 
 COMPLETE:
 As a vending machine owner,
@@ -100,9 +99,9 @@ I want the vending machine to return the correct amount of change to the buyer,
 if they have entered too much cash for the selected item.
 
 > Given.. a buyer enters x cash,
-> 
+>
 > When.. a buyer selcts an object which costs y,
-> 
+>
 > Then.. x - y = z and z is returned to the buyer in the form of coins.
 
 > Given.. z (from above) is due to the buyer,
@@ -131,7 +130,7 @@ so that there is valid exchange of goods for a fee.
 >
 > Then.. return the product to the buyer and remove it from the machines inventory.
 
-COMPLETE: 
+COMPLETE:
 As a vending machine owner,
 I want my machine to hold a range of different goods,
 so that i can appeal to people of different tastes.
@@ -139,7 +138,7 @@ so that i can appeal to people of different tastes.
 > Given.. i have added a number of different products to the inventory,
 >
 > When.. i print a list of the products in the machine,
-> 
+>
 > Then.. i see different items in the return.
 
 COMPLETE:
@@ -171,17 +170,18 @@ so that i dont run out of small coins quickly.
 
 ### Class: Vending machine
 Attributes:
-- coin_hash(hash of two int: coin => number of coins)
-- product_hash(hash of string and intiger: product_name => count)
-- buyer_paid; an intiger that the buyer has added to the machine.
+- change(hash of two int: coin => number of coins)
+- products(hash of object and intiger: product_name => count)
+- buyer_paid; a hash of coins that the buyer has added to the machine.
 
 Methods:
-- restock_product(two arguments; product and count)
-- add_product(three arguments; product, count and price)
-- restock_coins(two arguments; coin_value and number)
-- print_stock; return a formatted list of the products and the count of each.
+- restock_products(two arguments; product(object) and count(intiger))
+- restock_products(two arguments; product(object), count(intiger))
+- restock_coins(two arguments; coin_value(string) and count(intiger))
+- print_products; return a formatted list of the products and the count of each.
 - print_coins; return a formatted list of the coins and the count of each.
-- buy(one argument that is a string of the product name)
+- buy(one argument that is a string of the product name and return varies by
+returning an object and removing it from hash and managing coins.)
 private methods:
 - reset_buyer_paid; helper type to return buyer paid to zero.
 - calculate_exchange(two arguments; buyer paid attribute and product price attribute); will be returning a request for more money to the user or returning change the the user.
@@ -234,12 +234,14 @@ No API used in this project.
 
 ## Reflection / further development
 
-At the moment I have products and coins, next steps would be to start 
-
+At the moment I have products and coins, and a method to convert a change hash
+to a decimal amount... so next steps would be to work on coins added to machine
+by the buyer... and start considering whether the decimal amount in buyers
+'deposit' allows purchase of the selected product.... not long to go!
 
 ## Credits / team members
 
 No contributions are required at this time, as this is a tech test, however any
 feedback is appreciated.
 
-This was completed solo without the use of any tutorials.
+This was completed solo without the use of any tutorials, and was a lot of fun!

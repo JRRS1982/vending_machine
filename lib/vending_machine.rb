@@ -1,18 +1,60 @@
-
+# vending machine is a container for the products and change, could probably
+# encapsulate better with a seperate calculator perhaps or extract the change.
 class VendingMachine
-  attr_accessor :change, :products
+  attr_accessor :change, :products, :buyer_paid
 
   def initialize
-    @change = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
     @products = []
-    @product_count_helper = 0
+    @change = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
+    @buyer_paid = { '1p' => 0, '2p' => 0, '5p' => 0, '10p' => 0, '20p' => 0, '50p' => 0, '£1' => 0, '£2' => 0 }
   end
-  
+
+  def cash_converters(hash)
+    return_temp_value = 0
+    hash.each do |key, value|
+      if value > 0
+        temp_value = string_to_value(key)
+        return_temp_value += (temp_value *= value)
+      end
+    end
+    return return_temp_value
+  end
+
+  def pay(coin_name: "coin_default", coin_count: 0)
+    @buyer_paid.each do |key, value|
+      if coin_name == key
+        @buyer_paid[key] += coin_count
+      end
+    end
+  end
+
   def restock_coins(coin_name: "coin_default", coin_count: 0)
     @change.each do |key, value|
       if coin_name == key
         @change[key] += coin_count
       end
+    end
+  end
+
+  # not great, but does what it needs to do when considering explict £ sign use.
+  def string_to_value(string)
+    case string
+    when '1p'
+      1
+    when '2p'
+      2
+    when '5p'
+      5
+    when '10p'
+      10
+    when '20p'
+      20
+    when '50p'
+      50
+    when '£1'
+      100
+    when '£2'
+      200
     end
   end
 
@@ -29,7 +71,7 @@ class VendingMachine
       puts "#{key} || #{value}\n"
     end
   end
-  
+
   def unique_products
     @products.uniq
   end
