@@ -11,7 +11,7 @@ describe 'FEATURES' do
   it 'prints the coins that held with a header' do
     expect(STDOUT).to receive(:puts).with("coin's value || count")
     expect(STDOUT).to receive(:puts).with("£1 || 5\n")
-    subject.restock_coins(coin_name: '£1', coin_count: 5)
+    subject.restock_change(coin_name: '£1', coin_count: 5)
     subject.print_coins
   end
 
@@ -23,9 +23,9 @@ describe 'FEATURES' do
   end
 
   it 'given an array of coins it can convert it to decimal' do
-    subject.restock_coins(coin_name: '1p', coin_count: 3)
-    subject.restock_coins(coin_name: '£1', coin_count: 2)
-    subject.restock_coins(coin_name: '20p', coin_count: 4)
+    subject.restock_change(coin_name: '1p', coin_count: 3)
+    subject.restock_change(coin_name: '£1', coin_count: 2)
+    subject.restock_change(coin_name: '20p', coin_count: 4)
     expect(subject.cash_converters(subject.change)).to eq(283)
   end
 

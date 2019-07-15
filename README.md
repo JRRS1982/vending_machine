@@ -177,7 +177,7 @@ Attributes:
 Methods:
 - restock_products(two arguments; product(object) and count(intiger))
 - restock_products(two arguments; product(object), count(intiger))
-- restock_coins(two arguments; coin_value(string) and count(intiger))
+- restock_change(two arguments; coin_value(string) and count(intiger))
 - print_products; return a formatted list of the products and the count of each.
 - print_coins; return a formatted list of the coins and the count of each.
 - buy(one argument that is a string of the product name and return varies by

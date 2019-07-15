@@ -28,7 +28,7 @@ class VendingMachine
     end
   end
 
-  def restock_coins(coin_name: "coin_default", coin_count: 0)
+  def restock_change(coin_name: "coin_default", coin_count: 0)
     @change.each do |key, value|
       if coin_name == key
         @change[key] += coin_count

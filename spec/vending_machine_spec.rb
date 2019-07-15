@@ -1,6 +1,6 @@
 require './lib/vending_machine'
-require 'pry'
 require './lib/product'
+require 'pry'
 
 describe 'VendingMachine' do
   subject {VendingMachine.new}
@@ -9,13 +9,13 @@ describe 'VendingMachine' do
 
   let(:kit_kat_double) { double :Product, :name => 'Kitkat Chunky', :price => 50 }
 
-  context '.restock_coins' do
-    it 'allows restock coins method' do
-      expect(subject).to respond_to(:restock_coins)
+  context '.restock_change' do
+    it 'allows restock change method' do
+      expect(subject).to respond_to(:restock_change)
     end
 
     it 'can restock 1p coins' do
-      subject.restock_coins(coin_name: '1p', coin_count: 5)
+      subject.restock_change(coin_name: '1p', coin_count: 5)
       expect(subject.change['1p']).to eq(5)
     end
   end
@@ -26,14 +26,14 @@ describe 'VendingMachine' do
     end
 
     it 'prints out what coins are in the machine' do
-      subject.restock_coins(coin_name: '£1', coin_count: 5)
+      subject.restock_change(coin_name: '£1', coin_count: 5)
       expect(subject.change['£1']).to eq(5)
     end
 
     it 'the coin statement has a heading' do
       expect(STDOUT).to receive(:puts).with("coin's value || count")
       expect(STDOUT).to receive(:puts).with("£1 || 5\n")
-      subject.restock_coins(coin_name: '£1', coin_count: 5)
+      subject.restock_change(coin_name: '£1', coin_count: 5)
       subject.print_coins
     end
   end
@@ -93,24 +93,24 @@ describe 'VendingMachine' do
 
   context '.cash_converts' do
     it 'given an array of coins it can convert it to decimal' do
-      subject.restock_coins(coin_name: '1p', coin_count: 3)
+      subject.restock_change(coin_name: '1p', coin_count: 3)
       expect(subject.cash_converters(subject.change)).to eq(3)
     end
 
     it 'given a different array of coins it can convert it to decimal' do
-      subject.restock_coins(coin_name: '1p', coin_count: 5)
+      subject.restock_change(coin_name: '1p', coin_count: 5)
       expect(subject.cash_converters(subject.change)).to eq(5)
     end
 
     it 'given a different array of all the coins it can convert to decimal' do
-      subject.restock_coins(coin_name: '1p', coin_count: 1)
-      subject.restock_coins(coin_name: '2p', coin_count: 1)
-      subject.restock_coins(coin_name: '5p', coin_count: 1)
-      subject.restock_coins(coin_name: '10p', coin_count: 1)
-      subject.restock_coins(coin_name: '20p', coin_count: 1)
-      subject.restock_coins(coin_name: '50p', coin_count: 1)
-      subject.restock_coins(coin_name: '£1', coin_count: 1)
-      subject.restock_coins(coin_name: '£2', coin_count: 1)
+      subject.restock_change(coin_name: '1p', coin_count: 1)
+      subject.restock_change(coin_name: '2p', coin_count: 1)
+      subject.restock_change(coin_name: '5p', coin_count: 1)
+      subject.restock_change(coin_name: '10p', coin_count: 1)
+      subject.restock_change(coin_name: '20p', coin_count: 1)
+      subject.restock_change(coin_name: '50p', coin_count: 1)
+      subject.restock_change(coin_name: '£1', coin_count: 1)
+      subject.restock_change(coin_name: '£2', coin_count: 1)
       expect(subject.cash_converters(subject.change)).to eq(388)
     end
   end
@@ -123,6 +123,18 @@ describe 'VendingMachine' do
     it 'keeps track of what the buyer has entered to the machine' do
       subject.pay(coin_name: '1p', coin_count: 1)
       expect(subject.buyer_paid['1p']).to eq(1)
+    end
+
+    it 'given a different array of all the coins it can convert to decimal' do
+      subject.pay(coin_name: '1p', coin_count: 1)
+      subject.pay(coin_name: '2p', coin_count: 1)
+      subject.pay(coin_name: '5p', coin_count: 1)
+      subject.pay(coin_name: '10p', coin_count: 1)
+      subject.pay(coin_name: '20p', coin_count: 1)
+      subject.pay(coin_name: '50p', coin_count: 1)
+      subject.pay(coin_name: '£1', coin_count: 1)
+      subject.pay(coin_name: '£2', coin_count: 1)
+      expect(subject.cash_converters(subject.buyer_paid)).to eq(388)
     end
   end
 end
