@@ -3,11 +3,15 @@ require './lib/product'
 require 'pry'
 
 describe 'VendingMachine' do
-  subject {VendingMachine.new}
+  subject { VendingMachine.new }
 
-  let(:mint_aero_double) { double :Product, :name => 'Mint Aero', :price => 57 }
+  let(:mint_aero_double) { double :Product, 
+                                  :name => 'Mint Aero',
+                                  :price => 57 }
 
-  let(:kit_kat_double) { double :Product, :name => 'Kitkat Chunky', :price => 50 }
+  let(:kit_kat_double) { double :Product, 
+                                :name => 'Kitkat Chunky',
+                                :price => 50 }
 
   context '.restock_change' do
     it 'allows restock change method' do
@@ -116,7 +120,7 @@ describe 'VendingMachine' do
   end
 
   context '.pay' do
-    it 'keeps track of what the buyer has entered to the machine' do
+    it 'has a pay method' do
       expect(subject).to respond_to(:pay)
     end
 
@@ -135,6 +139,52 @@ describe 'VendingMachine' do
       subject.pay(coin_name: '£1', coin_count: 1)
       subject.pay(coin_name: '£2', coin_count: 1)
       expect(subject.cash_converters(subject.buyer_paid)).to eq(388)
+    end
+  end
+
+  context '.buy' do
+    it 'has a buy method' do
+      expect(subject).to respond_to(:buy)
+    end
+
+    it 'doesnt prints out the product message if any product unavailable' do
+      expect(STDOUT).to receive(:puts).with('Sorry we have no Mint Aero left')
+      subject.buy('Mint Aero')
+    end
+
+    it 'doesnt prints out the product message if this product is navailable' do
+      expect(STDOUT).to receive(:puts).with('Sorry we have no Mint Aero left')
+      subject.restock_products(product: kit_kat_double, product_count: 2)
+      subject.buy('Mint Aero')
+    end
+  end
+
+  context '.paid_enough' do
+    it 'takes in a hash and a price and returns false if not paid enough' do
+      expect(subject.paid_enough(subject.buyer_paid, kit_kat_double.price)).to be(false)
+    end
+
+    it 'takes in a hash and a price and returns true if paid enough' do
+      subject.pay(coin_name: '£1', coin_count: 2)
+      expect(subject.paid_enough(subject.buyer_paid, kit_kat_double.price)).to be(true)
+    end
+  end
+
+  context '.take_payment' do
+    it 'takes cost of the product away from the buyer paid hash' do
+      subject.restock_products(product: kit_kat_double, product_count: 3)
+      subject.pay(coin_name: '20p', coin_count: 1)
+      subject.pay(coin_name: '50p', coin_count: 1)
+      subject.buy('Kitkat Chunky')
+      expect(subject.cash_converters(subject.buyer_paid)).to eq(20)
+    end
+
+    it 'alternate takes cost of the product away from the buyer paid hash' do
+      subject.restock_products(product: kit_kat_double, product_count: 3)
+      subject.pay(coin_name: '10p', coin_count: 7)
+      subject.pay(coin_name: '£1', coin_count: 1)
+      subject.buy('Kitkat Chunky')
+      expect(subject.cash_converters(subject.buyer_paid)).to eq(120)
     end
   end
 end
